@@ -1,0 +1,40 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+mat-card {
+    height: auto;
+    width: 300px;
+    padding: 30px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    button {
+        height: 50px;
+    }
+}
+mat-label,h1{
+    text-transform: uppercase;
+}
+mat-card-actions{
+    display: flex;
+    justify-content: center;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    transition: all .2s;
+    color: blueviolet;
+}

@@ -1,6 +1,5 @@
 package com.fernandoschimidt.bookstoremanager.controllers;
 
-import com.fernandoschimidt.bookstoremanager.dto.MessageResponseDTO;
 import com.fernandoschimidt.bookstoremanager.entity.Author;
 import com.fernandoschimidt.bookstoremanager.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/author")
@@ -27,17 +26,19 @@ public class AuthorController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO create(@RequestBody Author author) {
-        Author savedAuthor = authorRepository.save(author);
-        return MessageResponseDTO.builder()
-                .message("Author created with ID " + savedAuthor.getId())
-                .build();
+    public Author create(@RequestBody Author author) {
+        return authorRepository.save(author);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        authorRepository.deleteById(id);
+    public void deletar(@PathVariable Long id) {
+        authorRepository
+                .findById(id)
+                .map(author -> {
+                    authorRepository.delete(author);
+                    return Void.TYPE;
+                });
     }
 
     @GetMapping
@@ -50,6 +51,14 @@ public class AuthorController {
         return authorRepository.findAll(pageRequest);
 
     }
+
+    @GetMapping("{id}")
+    public Author finById(@PathVariable Long id) {
+        return authorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+
 
     @GetMapping("/all")
     public List<Author> getAll() {

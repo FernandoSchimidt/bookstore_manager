@@ -29,4 +29,9 @@ export class AuthorService {
   save(author: Author): Observable<Author> {
     return this.http.post<Author>(this.url, author)
   }
+
+  delete(id: Author) {
+    console.log(`${this.url}/${id}`)
+    return this.http.delete(`${this.url}/${id}`)
+  }
 }

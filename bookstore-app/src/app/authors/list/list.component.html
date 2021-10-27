@@ -3,7 +3,8 @@
         <h1>Autores</h1>
     </mat-card-title>
     <mat-card-actions>
-        <button mat-raised-button style="padding: 0 20px; margin-left: 30px;" color="primary" routerLink="/authors/create">Novo</button>
+        <button mat-raised-button style="padding: 0 20px; margin-left: 30px;" color="primary"
+            routerLink="/authors/create">Novo</button>
     </mat-card-actions>
     <table mat-table [dataSource]="authors">
 
@@ -22,6 +23,14 @@
             <th mat-header-cell *matHeaderCellDef> Idade </th>
             <td mat-cell *matCellDef="let author"> {{author.age}} </td>
         </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Apagar </th>
+            <td mat-cell *matCellDef="let author">
+                <mat-icon color="accent" (click)="openDialog(author.id)">delete</mat-icon>
+            </td>
+        </ng-container>
+
 
         <tr mat-header-row *matHeaderRowDef="colunas"></tr>
         <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
