@@ -3,7 +3,7 @@ package com.fernandoschimidt.bookstoremanager.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @Data
@@ -14,7 +14,7 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, unique = true, length = 150)
     private String name;

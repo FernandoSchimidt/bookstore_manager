@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      login: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       name: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       password2: ['', [Validators.required, Validators.minLength(6)]]
@@ -33,7 +33,8 @@ export class RegisterComponent implements OnInit {
   submit() {
 
     let formValues = this.registerForm.value;
-    let user: User = new User(formValues.login, formValues.name, formValues.password);
+    let user: User = new User(formValues.username, formValues.name, formValues.password);
+    console.log(user)
     this.service.save(user)
       .subscribe(res => {
         this.registerForm.reset();

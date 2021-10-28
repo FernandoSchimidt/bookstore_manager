@@ -1,12 +1,14 @@
 package com.fernandoschimidt.bookstoremanager.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
@@ -14,12 +16,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true, length = 150)
     private String username;
 
-    @Column(unique = true)
-    private String name;
+    @Column(nullable = false)
+    private Integer password;
 
-    @Column
-    private String password;
 }

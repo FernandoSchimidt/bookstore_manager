@@ -32,7 +32,7 @@ public class AuthorController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Long id) {
+    public void deletar(@PathVariable Integer id) {
         authorRepository
                 .findById(id)
                 .map(author -> {
@@ -53,11 +53,10 @@ public class AuthorController {
     }
 
     @GetMapping("{id}")
-    public Author finById(@PathVariable Long id) {
+    public Author finById(@PathVariable Integer id) {
         return authorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-
 
 
     @GetMapping("/all")
